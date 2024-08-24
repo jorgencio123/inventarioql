@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos</title>
+</head>
+<body>
+    <h1>Lista de Productos</h1>
+    <a href="{{ url_for('add') }}">Agregar Producto</a>
+    <ul>
+        {% for producto in productos %}
+        <li>
+            <h2>{{ producto['descripcion'] }} - Stock: {{ producto['stock'] }}</h2>
+            {% if product_images[producto['id']] %}
+                <img src="{{ url_for('uploaded_file', producto_id=producto['id'], filename=product_images[producto['id']]) }}" alt="Imagen de {{ producto['descripcion'] }}" style="width: 100px; height: 100px;">
+            {% else %}
+                <p>No hay imagen disponible</p>
+            {% endif %}
+            <a href="{{ url_for('product_detail', id=producto['id']) }}">Ver Detalles</a> <!-- Enlace a los detalles del producto -->
+            <a href="{{ url_for('edit', id=producto['id']) }}">Editar</a>
+            <a href="{{ url_for('delete', id=producto['id']) }}">Eliminar</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

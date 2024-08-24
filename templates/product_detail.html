@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Producto</title>
+</head>
+<body>
+    <h1>{{ producto['descripcion'] }}</h1>
+    <p>Stock: {{ producto['stock'] }}</p>
+    
+    {% if images %}
+        <h2>Imágenes del Producto:</h2>
+        {% for image in images %}
+            <img src="{{ url_for('uploaded_file', producto_id=producto['id'], filename=image) }}" alt="Imagen de {{ producto['descripcion'] }}" style="width: 300px; height: auto;">
+        {% endfor %}
+    {% else %}
+        <p>No hay imágenes disponibles</p>
+    {% endif %}
+    
+    <a href="{{ url_for('index') }}">Volver a la lista</a>
+</body>
+</html>
